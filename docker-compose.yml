@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: eventflow
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./migration/V1__schemas_and_extensions.sql:/docker-entrypoint-initdb.d/01-V1.sql:ro
+      - ./migration/V2__identity.sql:/docker-entrypoint-initdb.d/02-V2.sql:ro
+      - ./migration/V3__catalog.sql:/docker-entrypoint-initdb.d/03-V3.sql:ro
+      - ./migration/V4__ticketing.sql:/docker-entrypoint-initdb.d/04-V4.sql:ro
+      - ./migration/V5__commerce.sql:/docker-entrypoint-initdb.d/05-V5.sql:ro
+      - ./migration/V6__parking.sql:/docker-entrypoint-initdb.d/06-V6.sql:ro
+      - ./migration/V7__ops.sql:/docker-entrypoint-initdb.d/07-V7.sql:ro
+      - ./migration/V8__privileges_and_rls.sql:/docker-entrypoint-initdb.d/08-V8.sql:ro
+      - ./migration/V9__seed.sql:/docker-entrypoint-initdb.d/09-V9.sql:ro
+      - ./backend/docker/init-app-login-role.sql:/docker-entrypoint-initdb.d/10-app-login-role.sql:ro
