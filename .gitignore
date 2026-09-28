@@ -1,5 +1,5 @@
 .DS_Store
 .env
+.claude/
 CLAUDE.md
-backend/
-docker-compose.yml
+docs/
